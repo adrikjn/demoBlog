@@ -49,3 +49,20 @@ Rajoute cette ligne en dessous
                 ]),
 
 Faire afficher dans le register.twig le username firstname etc avec des label 
+
+
+
+LOGIN MAINTENANT  
+
+symfony console make:auth
+Login form authenticator (1)
+Choose class name - LoginFormAuthenticator
+On garde le controlelr security
+oui on veut logout*
+
+!!!! COMMENT CETTE LIGNE 
+        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+
+!!!! DECOMMENTER
+        return new RedirectResponse($this->urlGenerator->generate('home'));
+et mettre la route que l'on souhaite
