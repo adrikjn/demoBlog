@@ -32,3 +32,16 @@ UniqueEntity = Email / yes
 Vérify account : on a pas de mailer donc on met non
 Auto connexion après la création ducompte : NON
 Sélectionner le lieu de redirection (13 ici car Home)
+
+Ajout dans le registrationformtype les champs qui manquent (username, firstname.. ceux qu'on a mis dans les tables)
+Remplacer le PasswordType::class par RepeatedType::class ligne 33
+Rajoute cette ligne en dessous 
+                   'type' => PasswordType::class,
+                'first_options' => ['label' => 'mot de passe'],
+                'second_options' => ['label' => 'confirmer le mot de passe'],
+                'invalid_message' => 'Les mots de passes ne correspondent pas',
+                new Regex([ (class importé)
+                    'pattern' => '/^(?=.*[a-z])(?=.*\d)(?=.*[@$!%#*?&])[A-Za-z\d@$!%#*?&]{6,}$/',
+                    'match' => true,
+                    "message" => 'Votre mot de passe doit contenir au moins un chiffre, un caractère spécial (@$!#%*?&), une lettre minuscule et une lettre majuscule !'
+                ]),
