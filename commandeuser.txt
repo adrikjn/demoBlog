@@ -40,8 +40,12 @@ Rajoute cette ligne en dessous
                 'first_options' => ['label' => 'mot de passe'],
                 'second_options' => ['label' => 'confirmer le mot de passe'],
                 'invalid_message' => 'Les mots de passes ne correspondent pas',
+
+                Mettre le regex en dessous de new length ici
                 new Regex([ (class importé)
                     'pattern' => '/^(?=.*[a-z])(?=.*\d)(?=.*[@$!%#*?&])[A-Za-z\d@$!%#*?&]{6,}$/',
                     'match' => true,
                     "message" => 'Votre mot de passe doit contenir au moins un chiffre, un caractère spécial (@$!#%*?&), une lettre minuscule et une lettre majuscule !'
                 ]),
+
+Faire afficher dans le register.twig le username firstname etc avec des label 
