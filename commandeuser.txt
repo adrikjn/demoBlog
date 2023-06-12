@@ -66,3 +66,34 @@ oui on veut logout*
 !!!! DECOMMENTER
         return new RedirectResponse($this->urlGenerator->generate('home'));
 et mettre la route que l'on souhaite
+
+
+PARTIE ADMIN (SECURITE)
+
+On créer le controller : symfony console make:controller AdminController
+
+
+    Fichier base : 
+        {% if is_granted("ROLE_ADMIN") %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">BackOffice</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{ path('new_article') }}">Ajouter un article</a>
+          </div>
+        </li>
+        {% endif %}
+
+        comment on cache pour les non admin 
+
+
+Si vous n'êtes pas admin vous n'avez pas accès au URL comment par /admin :
+ role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }
+    access_denied_url: /
+
+    cONFIGurer security.yaml comme ça pour la sécurité elle renvoie automatiquement sur login
