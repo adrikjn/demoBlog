@@ -34,10 +34,13 @@ class AdminController extends AbstractController
         ]);
     }
 
+    #[Route('/admin/article/edit/{id}', name: "admin_article_edit")]
     #[Route('/admin/article/new', name: "admin_article_new")]
-    public function formArticle(Request $request, EntityManagerInterface $manager)
+    public function formArticle(Request $request, EntityManagerInterface $manager, Article $article = null)
     {
-        $article = new Article;
+        if($article === null){
+            $article = new Article;
+        }
 
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
@@ -54,7 +57,15 @@ class AdminController extends AbstractController
 
         return $this->render('admin/formArticle.html.twig', [
             'form' => $form,
-
+            'editMode' => $article->getId()!==null
         ]);
+    }
+
+    #[Route('/admin/article/delete/{id}', name: "admin_article_delete")]
+    public function deleteArticle(Article $article, EntityManagerInterface $manager){
+        $manager->remove($article);
+        $manager->flush();
+        $this->addFlash('success', "l'article a bien été supprimé!!!");
+        return $this->redirectToRoute('admin_article');
     }
 }

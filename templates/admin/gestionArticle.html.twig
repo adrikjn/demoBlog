@@ -10,6 +10,8 @@
 
 	<div class="container">
 		<h1 class="text-center my-4">Gestion des articles</h1>
+
+        <a href="{{ path('admin_article_new') }}" class="btn btn-info my-3">Ajouter un article</a>
 		<table class="table table-dark">
 			<thead>
                 <tr>
@@ -30,8 +32,8 @@
                     <td>{{ article.createdAt|date("d/m/Y à H:i:s") }}</td>
                     <td>{{ article.category.title }}</td>
                     <td>
-                        <a href="" class="text-warning"><i class="fas fa-edit"></i></a>
-                        <a href="" class="text-danger"><i class="fas fa-trash"></i></a>
+                        <a href="{{ path('admin_article_edit', {id: article.id}) }}" class="text-warning"><i class="fas fa-edit"></i></a>
+                        <a href="{{ path('admin_article_delete', {id: article.id}) }}" class="text-danger"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
             {% endfor %}
