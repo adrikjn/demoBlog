@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Article
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+
+		<h1 class="text-center my-4">Ajouter un article</h1>
+		{{ form_start(form, {
+        attr: {
+            novalidate: 'novalidate'
+        }
+    }) }}
+		{{ form_row(form.title, {
+        label: 'Titre'
+    }) }}
+
+		{{ form_row(form.category, {
+        label: 'Categorie'
+    }) }}
+
+		{{ form_row(form.content, {
+        label: "Contenu", 
+        attr: {
+            placeholder: "Contenue de l'article"
+        }
+    }) }}
+		{{ form_row(form.image) }}
+
+		<button type="submit" class="btn btn-secondary">Enregistré</button>
+
+
+	</div>
+
+	{{ form_end(form) }}
+{% endblock %}
