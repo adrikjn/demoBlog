@@ -60,6 +60,7 @@ Choose class name - LoginFormAuthenticator
 On garde le controlelr security
 oui on veut logout*
 
+Dans loginformauthenticator :
 !!!! COMMENT CETTE LIGNE 
         throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
 
@@ -72,6 +73,10 @@ PARTIE ADMIN (SECURITE)
 
 On créer le controller : symfony console make:controller AdminController
 
+    On a rajouter dans la bdd dans roles ["ROLE_ADMIN"] pour le 1er user (admin)
+
+    On a décommenté le role_admin path/admin dans security.yaml 
+    et l'acccess denied etc.. voir fichier security.yaml
 
     Fichier base : 
         {% if is_granted("ROLE_ADMIN") %}
@@ -97,3 +102,20 @@ Si vous n'êtes pas admin vous n'avez pas accès au URL comment par /admin :
     access_denied_url: /
 
     cONFIGurer security.yaml comme ça pour la sécurité elle renvoie automatiquement sur login
+
+
+
+Liéer le user au commentaire :: 
+
+-1 Remmettre symfony make:entity Comment (il va dire elle existe déja)
+-2 Ajoute new properties
+-3 User puis relation / puis related to User
+-4 ManyToOne car each comment relate to has one User / Each User can relate to can have many comments Objects (meilleur choix)
+-5 No car si tu commentes faut un message
+-6- Pour accéder au commentaire à partir de l'user : Yes  //  $user->getComments()
+-7 On garde le même nom 
+-8 Message orphelin = yes
+-9 entré
+-10 On supprime les valeurs dans la BDD (truncate ou drop via la BDD) car on avait des fixtures 
+-11 symfony console make:migration 
+-12 symfony console d:m:m
