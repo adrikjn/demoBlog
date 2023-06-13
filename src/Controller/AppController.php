@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Article;
+use App\Entity\Comment;
 use App\Form\ArticleType;
+use App\Form\CommentType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,14 +32,38 @@ class AppController extends AbstractController
     }
 
     #[Route("/blog/show/{id}", name: "blog_show")]
-    public function show(Article $article =null) :Response
+    public function show(EntityManagerInterface $manager ,Request $request, Article $article =null) :Response
     {
         if($article == null)
         {
             return $this->redirectToRoute('home');
         }
+
+        $comment = new Comment;
+
+        if($this->getUser()){
+            $user = $this->getUser();
+        }
+
+        $form = $this->createForm(CommentType::class, $comment);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $comment->setCreatedAt(new DateTime)
+                    ->setArticle($article)
+                    ->setUser($user);
+            $manager->persist($comment);
+            $manager->flush();
+            return $this->redirectToRoute("blog_show", [
+                'id' => $article->getId()
+            ]);
+        }
+
+
         return $this->render('app/show.html.twig', [
-            'article' => $article
+            'article' => $article,
+            'commentForm' => $form->createView()
         ]);
     }
 

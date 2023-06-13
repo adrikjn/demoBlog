@@ -26,6 +26,25 @@
 
 	</section>
 
+
+	<div class="container my-4">
+	
+		{% if app.user %}
+			<h2 class="text-center">Ajouter un commentaire</h2>
+
+			{{form_start(commentForm)}}
+				{{form_row(commentForm.content, {
+					label: 'Votre commentaire'
+				})}}
+				<button type="submit" class="btn btn-info">Envoyer</button>
+			{{form_end(commentForm)}}
+		{% else %}
+			<p class="text-center h4">Pour ajouter un commentaire, <a href="{{ path('app_login') }}">connectez-vous</a></p>
+		{% endif %}
+		
+
+	</div>
+
 	<div class="container my-4">
 
 		<h2 class="text-center">Commentaires</h2>
@@ -44,7 +63,7 @@
                         
 
                         <tr>
-                            <td>{{ comment.author }}<br> <small>{{ comment.createdAt|date('d/m/Y à H:i:s') }}</small></td>
+                            <td>{{ comment.user.userName }}<br> <small>{{ comment.createdAt|date('d/m/Y à H:i:s') }}</small></td>
                             <td>{{ comment.content }}</td>
                         </tr>
 

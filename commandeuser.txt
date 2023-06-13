@@ -119,3 +119,15 @@ Liéer le user au commentaire ::
 -10 On supprime les valeurs dans la BDD (truncate ou drop via la BDD) car on avait des fixtures 
 -11 symfony console make:migration 
 -12 symfony console d:m:m
+
+
+Création du formulaire : 
+
+symfony console make:form CommentType
+On le bound à Comment
+On commente les 3 champs dans le CommentType Car dynamique :         // ->add('createdAt')
+                                                                    // ->add('article')
+                                                                    // ->add('user')
+On fait la partie du controller avec les setters et getter etc regarder appcontroler dans le show:
+
+On peut faire le twig regarder show twig
