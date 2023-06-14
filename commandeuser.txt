@@ -131,3 +131,6 @@ On commente les 3 champs dans le CommentType Car dynamique :         // ->add('c
 On fait la partie du controller avec les setters et getter etc regarder appcontroler dans le show:
 
 On peut faire le twig regarder show twig
+
+
+symfony new NOM --webapp
